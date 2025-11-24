@@ -1,0 +1,201 @@
+✅ 1. Funktioner – Användarsida
+
+Frontend
+
+Startsida med presentation.
+
+Registrering och login (email + lösenord).
+
+Användarprofil med:
+
+Bildupload
+
+Bio
+
+Intressen
+
+
+Sida för att bläddra bland andra profiler.
+
+Möjlighet att gilla profiler (”like”).
+
+Chatfunktion mellan två matchade användare.
+
+
+Backend
+
+Endpoints för:
+
+Skapa konto
+
+Logga in
+
+Uppdatera profil
+
+Hämta andra profiler
+
+Gilla/matcha
+
+Skapa och hämta chattmeddelanden
+
+
+All funktionalitet ska ha korrekt autentisering (JWT eller sessionscookies).
+
+
+
+---
+
+✅ 2. Admin-panel (för dig som ägare)
+
+Skapa en separat admin-sida som bara ägaren kommer åt.
+
+Admin ska kunna:
+
+Se alla användare
+
+Se alla profiler
+
+Se alla likes/matchningar
+
+Se alla chattmeddelanden mellan användare
+
+Se loggar över aktivitet (login, ändringar, meddelanden)
+
+
+Detta ska vara filtrerbart och sökbart.
+
+
+---
+
+✅ 3. Databas (PostgreSQL – stabil, inget försvinner vid crash)
+
+Använd PostgreSQL (Render har gratis tier). Skapa följande tabeller:
+
+users
+
+id (PK)
+
+email
+
+password_hash
+
+name
+
+bio
+
+interests (array eller text)
+
+image_url
+
+created_at
+
+
+likes
+
+id (PK)
+
+from_user_id
+
+to_user_id
+
+created_at
+
+
+matches
+
+id (PK)
+
+user1_id
+
+user2_id
+
+created_at
+
+
+messages
+
+id (PK)
+
+match_id
+
+sender_id
+
+content
+
+created_at
+
+
+activity_logs
+
+id (PK)
+
+user_id
+
+action (t.ex. ”login”, ”sent message”, ”updated profile”)
+
+metadata (JSON)
+
+created_at
+
+
+> Allt ska sparas direkt i databasen med transaktioner, så ingenting kan försvinna vid crash.
+
+
+
+
+---
+
+✅ 4. Stabilitet & Säkerhet
+
+Använd konsekventa databastransaktioner.
+
+Lägg till server-side validering på alla API-anrop.
+
+Spara alla chattmeddelanden i databasen innan något skickas till klienten.
+
+Logga alla viktiga händelser i activity_logs.
+
+Hantera filer genom att spara bild-URL (t.ex. uploads via Cloudinary eller Replit/Render storage).
+
+
+
+---
+
+✅ 5. Deployment för Render.com
+
+Projektet måste:
+
+För Node/Express
+
+Ha en package.json med start-script
+
+Servern ska lyssna på process.env.PORT
+
+Använd DATABASE_URL som miljövariabel
+
+
+För Python/Flask
+
+Ha requirements.txt
+
+Ha gunicorn som server
+
+Starta via gunicorn app:app
+
+Lyssna på port från PORT
+
+
+Övrigt
+
+README ska innehålla:
+
+Setup
+
+Miljövariabler
+
+Deploy-steg för Render
+
+
+
+
+---
